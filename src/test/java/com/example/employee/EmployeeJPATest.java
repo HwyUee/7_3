@@ -69,7 +69,13 @@ public class EmployeeJPATest {
         String actualCompanyName = employeeRepository.findCompanyNameByEmployeeName("xiaohong");
         assertThat(actualCompanyName).isEqualTo(expectedCompanyName);
     }
+    @Test
+    public void should_return_influence_lines_when_update_employee_name() throws Exception {
+        //6.将xiaohong的名字改成xiaobai,输出这次修改影响的行数
+        Integer expectedLine = 1;
+        Integer actualLine = employeeRepository.modifyByIName("xiaobai", "xiaohong");
+        assertThat(actualLine).isEqualTo(expectedLine);
 
-
+    }
 
 }
