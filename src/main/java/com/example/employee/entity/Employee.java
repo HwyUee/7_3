@@ -2,8 +2,10 @@ package com.example.employee.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Employee")
 public class Employee {
     @Id
     private int id;
@@ -13,7 +15,10 @@ public class Employee {
     private int companyId;
     private int salary;
 
-    public Employee(String name, int age, String gender, int companyId, int salary,int id) {
+    public Employee() {
+    }
+
+    public Employee(String name, int age, String gender, int companyId, int salary, int id) {
         this.id = id;
         this.name = name;
         this.age = age;
