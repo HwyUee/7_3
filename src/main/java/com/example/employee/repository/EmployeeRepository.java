@@ -19,5 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "select * from Employee t where name like %?1% and t.salary > ?2 limit 1", nativeQuery = true)
     //实现方法
     Employee findFirstByNameContainingAndSalaryGreaterThan(String name,Integer salary);
-
+    //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
+    @Query(value = "select * from Employee t inner join Company c on t.companyId=c.id where t.companyId=?1 order by t.salary desc limit 1 ", nativeQuery = true)
+    Employee findhighestsalaryemployeeBycompanyId(int companyId);
 }
