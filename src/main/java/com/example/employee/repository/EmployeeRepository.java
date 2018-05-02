@@ -26,5 +26,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findhighestsalaryemployeeBycompanyId(int companyId);
     //4.实现对Employee的分页查询，每页两个数据
     Page<Employee> findAll(Pageable pageable);
+    //5.查找**的所在的公司的公司名称
+    @Query(value = "select c.CompanyName from Employee t inner join Company c on t.companyId=c.id where t.name=?1",nativeQuery = true)
+    String findCompanyNameByEmployeeName(String name);
 
 }
