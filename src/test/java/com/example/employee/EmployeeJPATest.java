@@ -9,8 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -41,6 +39,14 @@ public class EmployeeJPATest {
         Employee expectedEmployee = employeeRepository.findFirstByName(actualName);
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
+    @Test
+    public void should_return_employee_given_character_in_name_and_salary_large_than() throws Exception {
+        //2.找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
+        Employee expectedEmployee=employeeRepository.findFirstByNameContainingAndSalaryGreaterThan("n",5000);
+        String actualName ="xiaoming";
+        assertThat(actualName).isEqualTo(expectedEmployee.getName());
+    }
+
 
 
 }
