@@ -1,6 +1,8 @@
 package com.example.employee.repository;
 
 import com.example.employee.entity.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
     @Query(value = "select * from Employee t inner join Company c on t.companyId=c.id where t.companyId=?1 order by t.salary desc limit 1 ", nativeQuery = true)
     Employee findhighestsalaryemployeeBycompanyId(int companyId);
+    //4.实现对Employee的分页查询，每页两个数据
+    Page<Employee> findAll(Pageable pageable);
+
 }
