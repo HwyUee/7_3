@@ -77,5 +77,11 @@ public class EmployeeJPATest {
         assertThat(actualLine).isEqualTo(expectedLine);
 
     }
-
+    @Test
+    public void should_deleted_employee_when_given_employee_name() throws Exception {
+        //7.删除姓名是xiaohong的employee
+        employeeRepository.deleteByName("xiaohong");
+        Employee actualEmployee = employeeRepository.findFirstByName("xiaohong");
+        assertThat(actualEmployee).isNull();
+    }
 }
